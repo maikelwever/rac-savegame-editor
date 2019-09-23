@@ -2,6 +2,8 @@
 
 A savegame editor for the Ratchet and Clank series of games.
 
+![Screenshot of the UI](/screenshot.png?raw=true)
+
 
 # Functional parts
  

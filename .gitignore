@@ -1,0 +1,10 @@
+bin/
+obj/
+/packages/
+
+# Some common IDEs
+.idea
+.vscode
+
+# Glade temporary files
+*.*~ 

@@ -1,0 +1,3 @@
+[submodule "RACSaveGameEditor/PS3SaveManager"]
+	path = RACSaveGameEditor/PS3SaveManager
+	url = https://github.com/maikelwever/ps3savemanager

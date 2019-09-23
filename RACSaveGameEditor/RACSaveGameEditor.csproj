@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>netcoreapp2.0</TargetFramework>
+        <RootNamespace>rac-savegame-editor</RootNamespace>
+        <LangVersion>8</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Remove="**\*.glade" />
+        <EmbeddedResource Include="**\*.glade">
+            <LogicalName>%(Filename)%(Extension)</LogicalName>
+        </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="GtkSharp" Version="3.22.24.*" />
+        <PackageReference Include="System.Drawing.Common" Version="4.6.0-preview9.19421.4" />
+    </ItemGroup>
+
+</Project>

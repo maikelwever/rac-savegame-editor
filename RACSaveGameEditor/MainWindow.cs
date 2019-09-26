@@ -13,6 +13,7 @@ namespace RACSaveGameEditor
         [UI] private ImageMenuItem fileOpenPS2PSU;
         [UI] private ImageMenuItem fileSaveButton;
         [UI] private ImageMenuItem fileSaveAsButton;
+        [UI] private ImageMenuItem closeTabButton;
         [UI] private ImageMenuItem quitButton;
         
         [UI] private Notebook notebook;
@@ -45,15 +46,23 @@ namespace RACSaveGameEditor
             };
             //fileOpenPS2PSU.Activated += FileOpenButton_Clicked;
             fileSaveButton.Activated += FileSaveButton_Clicked;
+            closeTabButton.Activated += CloseTabButton_Clicked;
             quitButton.Activated += Window_DeleteEvent;
+        }
+
+        private void CloseTabButton_Clicked(object sender, EventArgs e)
+        {
+            if (notebook.CurrentPage >= 0) {
+                notebook.RemovePage(notebook.CurrentPage);
+            }
         }
 
         private void FileSaveButton_Clicked(object sender, EventArgs e)
         {
-            Console.WriteLine("Saving!");
-
-            SaveGamePage page = (SaveGamePage) notebook.GetNthPage(notebook.CurrentPage);
-            page.ExportData("test.bin");
+            if (notebook.CurrentPage >= 0) {
+                SaveGamePage page = (SaveGamePage) notebook.GetNthPage(notebook.CurrentPage);
+                page.ExportData();
+            }
         }
 
         private string OpenFileOpenDialog(FileChooserAction action)
@@ -87,6 +96,7 @@ namespace RACSaveGameEditor
         private void LoadSaveGame(SaveGameContainer container)
         {
             notebook.AppendPage(new SaveGamePage(container), new Label(System.IO.Path.GetFileName(container.path)));
+            notebook.CurrentPage = notebook.NPages - 1;
         }
 
     }

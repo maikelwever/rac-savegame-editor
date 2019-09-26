@@ -7,7 +7,9 @@ namespace RACSaveGameEditor
 {
     public class SaveGamePage : Frame
     {
+        #pragma warning disable CS0649
         [UI] private ListBox savegameListBox;
+        #pragma warning restore CS0649
 
         private SaveGameContainer container;
         private byte[] fileData;
@@ -84,7 +86,7 @@ namespace RACSaveGameEditor
             }
         }
 
-        public void ExportData(String filename)
+        public void ExportData()
         {
             foreach (var section in saveGameData) {
                 foreach (var item in section.Value) {
@@ -92,7 +94,7 @@ namespace RACSaveGameEditor
                 }
             }
 
-            // container.Save(fileData); // TODO: enable this when ready
+            container.Save(fileData);
         }
     }
 }

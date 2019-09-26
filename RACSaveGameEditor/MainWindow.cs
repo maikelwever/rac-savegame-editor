@@ -6,8 +6,10 @@ namespace RACSaveGameEditor
 {
     class MainWindow : Window
     {
+        #pragma warning disable CS0649
         [UI] private ImageMenuItem fileOpenEncryptedPS3;
         [UI] private ImageMenuItem fileOpenDecryptedPS3;
+        [UI] private ImageMenuItem fileOpenPSVita;
         [UI] private ImageMenuItem fileOpenPS2PSU;
         [UI] private ImageMenuItem fileSaveButton;
         [UI] private ImageMenuItem fileSaveAsButton;
@@ -15,6 +17,8 @@ namespace RACSaveGameEditor
         
         [UI] private Notebook notebook;
         private Builder builder;
+
+        #pragma warning restore CS0649
 
         public MainWindow() : this(new Builder("MainWindow.glade"))
         {

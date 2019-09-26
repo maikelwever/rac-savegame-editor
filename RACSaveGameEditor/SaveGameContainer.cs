@@ -134,18 +134,26 @@ namespace RACSaveGameEditor
             public DecryptedPS3(string path) : base(path)
             {
                 this.path = path;
+
                 
-                string region;
-                using (var stream = new FileStream(Path.Combine(path, "PARAM.SFO"), FileMode.Open, FileAccess.Read))
-                {
-                    var buffer = new byte[9];
-                    stream.Seek(0x968, SeekOrigin.Begin);
-                    //stream.Seek(0x5d8, SeekOrigin.Begin);
-                    stream.Read(buffer, 0, 9);
-                    region = Encoding.ASCII.GetString(buffer);
-                }
-                    
+                string region = "";
+                try {
+                    region = Path.GetFileName(path).Split('_')[0];
+                } catch {}
+
                 type = DetectPS3GameType(region);
+
+                if (type == GameType.ERROR) {
+                    using (var stream = new FileStream(Path.Combine(path, "PARAM.SFO"), FileMode.Open, FileAccess.Read))
+                    {
+                        var buffer = new byte[9];
+                        stream.Seek(0x968, SeekOrigin.Begin);
+                        //stream.Seek(0x5d8, SeekOrigin.Begin);
+                        stream.Read(buffer, 0, 9);
+                        region = Encoding.ASCII.GetString(buffer);
+                    }
+                    type = DetectPS3GameType(region);
+                }
             }
 
             public override byte[] Load()

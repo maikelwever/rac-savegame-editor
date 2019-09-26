@@ -15,6 +15,7 @@ namespace RACSaveGameEditor
         [UI] private ImageMenuItem fileSaveAsButton;
         [UI] private ImageMenuItem closeTabButton;
         [UI] private ImageMenuItem quitButton;
+        [UI] private ImageMenuItem aboutButton;
         
         [UI] private Notebook notebook;
         private Builder builder;
@@ -48,6 +49,15 @@ namespace RACSaveGameEditor
             fileSaveButton.Activated += FileSaveButton_Clicked;
             closeTabButton.Activated += CloseTabButton_Clicked;
             quitButton.Activated += Window_DeleteEvent;
+
+            aboutButton.Activated += AboutButton_Clicked;
+        }
+
+        private void AboutButton_Clicked(object sender, EventArgs e)
+        {
+            AboutDialog about = (AboutDialog) builder.GetObject("AboutDialog");
+            about.Run();
+            about.Hide();
         }
 
         private void CloseTabButton_Clicked(object sender, EventArgs e)
@@ -83,7 +93,7 @@ namespace RACSaveGameEditor
                 result = dialog.Filename;
             }
 
-            dialog.Destroy();
+            dialog.Hide();
 
             return result;
         }

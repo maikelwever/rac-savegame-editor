@@ -5,11 +5,11 @@
   <object class="GtkAboutDialog" id="AboutDialog">
     <property name="can_focus">False</property>
     <property name="type_hint">dialog</property>
-    <property name="program_name">racps3-savegame-editor</property>
+    <property name="program_name">rac-savegame-editor</property>
     <property name="version">0.0.1</property>
     <property name="copyright" translatable="yes">(c) 2019 - Maikel Wever</property>
-    <property name="comments" translatable="yes">A savegame editor for the PS3 versions of the Ratchet and Clank trilogy. Uses PS3SaveManager by Jappi88.</property>
-    <property name="website">https://github.com/maikelwever/racps3-savegame-editor</property>
+    <property name="comments" translatable="yes">A savegame editor for various Ratchet and Clank games on various platforms. Uses PS3SaveManager by Jappi88.</property>
+    <property name="website">https://github.com/maikelwever/rac-savegame-editor</property>
     <property name="authors">Maikel Wever</property>
     <property name="logo_icon_name">applications-accessories</property>
     <property name="license_type">gpl-3-0-only</property>

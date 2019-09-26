@@ -5,6 +5,10 @@ obj/
 # Some common IDEs
 .idea
 .vscode
+.vs
+Backup
+UpgradeLog.htm
+*.swp
 
 # Glade temporary files
 *.*~ 

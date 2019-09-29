@@ -129,6 +129,11 @@ namespace RACSaveGameEditor
                     new SaveGameItem.Boolean("Plasma Whip V1", 0x527),
                     new SaveGameItem.Boolean("Quack-O-Ray V1", 0x52f),
                     new SaveGameItem.Boolean("R3YNO V1", 0x53f),
+                } 
+            },
+            {
+                "Misc", new List<SaveGameItem> {
+                    new SaveGameItem.Boolean("Enable Quick Select Pause", 0x2c26),
                 }
             }
         };

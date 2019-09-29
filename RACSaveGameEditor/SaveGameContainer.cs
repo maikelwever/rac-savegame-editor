@@ -7,6 +7,7 @@ namespace RACSaveGameEditor
 {
     public abstract class SaveGameContainer
     {
+        private byte[] fileData;
         public string path;
         public GameType type;
         
@@ -15,8 +16,28 @@ namespace RACSaveGameEditor
             this.path = path;
         }
 
-        public abstract byte[] Load();
-        public abstract void Save(byte[] data);
+        public virtual int ReadInt(int position) {
+            return (fileData[position + 0] << 24) | (fileData[position + 1] << 16) | (fileData[position + 2] << 8) | (fileData[position + 3]);
+        }
+
+        public virtual void WriteInt(int position, int value) {
+            byte[] byt = BitConverter.GetBytes(value);
+            fileData[position + 0] = byt[3];
+            fileData[position + 1] = byt[2];
+            fileData[position + 2] = byt[1];
+            fileData[position + 3] = byt[0];
+        }
+
+        public virtual byte ReadByte(int position) {
+            return fileData[position];
+        }
+
+        public virtual void WriteByte(int position, byte value) {
+            fileData[position] = value;
+        }
+
+        public abstract void Load();
+        public abstract void Save();
 
         public static GameType DetectPS3GameType(string region)
         {
@@ -98,7 +119,7 @@ namespace RACSaveGameEditor
                 }
             }
 
-            public override byte[] Load()
+            public override void Load()
             {
                 var fileName = GetPS3FileName(type);
 
@@ -106,14 +127,12 @@ namespace RACSaveGameEditor
                 {
                     if (saveFile.PFDEntry.file_name == fileName)
                     {
-                        return saveFile.DecryptToBytes();
+                        fileData = saveFile.DecryptToBytes();
                     }
                 }
-
-                return new byte[]{};
             }
 
-            public override void Save(byte[] data)
+            public override void Save()
             {
                 var fileName = GetPS3FileName(type);
 
@@ -121,7 +140,7 @@ namespace RACSaveGameEditor
                 {
                     if (saveFile.PFDEntry.file_name == fileName)
                     {
-                        saveFile.Encrypt(data);
+                        saveFile.Encrypt(fileData);
                     }
                 }
 
@@ -156,16 +175,16 @@ namespace RACSaveGameEditor
                 }
             }
 
-            public override byte[] Load()
+            public override void Load()
             {
                 var fileName = GetPS3FileName(type);
-                return File.ReadAllBytes(Path.Combine(path, fileName));
+                fileData = File.ReadAllBytes(Path.Combine(path, fileName));
             }
 
-            public override void Save(byte[] data)
+            public override void Save()
             {
                 var fileName = GetPS3FileName(type);
-                File.WriteAllBytes(Path.Combine(path, fileName), data);
+                File.WriteAllBytes(Path.Combine(path, fileName), fileData);
             }
         }
 
@@ -209,15 +228,29 @@ namespace RACSaveGameEditor
                 }
             }
 
-            public override byte[] Load()
+            public override void Load()
             {
-                return File.ReadAllBytes(path);
+                fileData = File.ReadAllBytes(path);
             }
 
-            public override void Save(byte[] data)
+            public override void Save()
             {
-                File.WriteAllBytes(path, data);
+                File.WriteAllBytes(path, fileData);
             }
+
+            public override int ReadInt(int position) {
+                // TODO: Test if this works as intended and remove this message if so.
+                return (fileData[position + 3] << 24) | (fileData[position + 2] << 16) | (fileData[position + 1] << 8) | (fileData[position + 0]);
+            }
+
+            public override void WriteInt(int position, int value) {
+                byte[] byt = BitConverter.GetBytes(value);
+                fileData[position + 0] = byt[0];
+                fileData[position + 1] = byt[1];
+                fileData[position + 2] = byt[2];
+                fileData[position + 3] = byt[3];
+            }
+
         }
     }
 }

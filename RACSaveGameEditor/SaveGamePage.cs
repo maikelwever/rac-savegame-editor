@@ -12,7 +12,6 @@ namespace RACSaveGameEditor
         #pragma warning restore CS0649
 
         private SaveGameContainer container;
-        private byte[] fileData;
         private Dictionary<string, List<SaveGameItem>> saveGameData;
         
         public SaveGamePage(SaveGameContainer container) : this(container, new Builder("MainWindow.glade"))
@@ -22,8 +21,8 @@ namespace RACSaveGameEditor
         private SaveGamePage(SaveGameContainer container, Builder builder) : base(builder.GetObject("savegameFrame").Handle)
         {
             builder.Autoconnect(this);
+            container.Load();
             this.container = container;
-            fileData = container.Load();
             switch (container.type) {
                 case GameType.RAC:
                     saveGameData = GameItems.RacOneItems;
@@ -51,7 +50,7 @@ namespace RACSaveGameEditor
         private void LoadValues() {
             foreach (var section in saveGameData) {
                 foreach (var item in section.Value) {
-                    item.ReadValue(fileData);
+                    item.ReadValue(container);
                 }
             }
         }
@@ -90,11 +89,11 @@ namespace RACSaveGameEditor
         {
             foreach (var section in saveGameData) {
                 foreach (var item in section.Value) {
-                    item.WriteValue(ref fileData);
+                    item.WriteValue(container);
                 }
             }
 
-            container.Save(fileData);
+            container.Save();
         }
     }
 }

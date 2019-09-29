@@ -12,29 +12,9 @@ namespace RACSaveGameEditor {
             this.position = position;
         }
 
-        public abstract void ReadValue(byte[] data);
-        public abstract void WriteValue(ref byte[] data);
+        public abstract void ReadValue(SaveGameContainer container);
+        public abstract void WriteValue(SaveGameContainer container);
         public abstract Widget CreateEditWidget();
-
-        public static int ReadInt(byte[] data, int offset, int length = 4)
-        {
-            int result = 0;
-            for (int i = 0; i < length; i++)
-            {
-                result |= data[offset + i] << ((length - i - 1) * 8);
-            }
-
-            return result;
-        }
-
-        public static void WriteInt(ref byte[] data, int offset, int input, int length = 4)
-        {
-            byte[] byt = BitConverter.GetBytes(input);
-            for (int i = 0; i < length; i++)
-            {
-                data[offset + i] = byt[length - i - 1];
-            }
-        }
 
         public class Integer : SaveGameItem
         {
@@ -74,22 +54,22 @@ namespace RACSaveGameEditor {
                 return widget;
             }
 
-            public override void ReadValue(byte[] data)
+            public override void ReadValue(SaveGameContainer container)
             {
-                value = ReadInt(data, position);
+                value = container.ReadInt(position);
             }
 
-            public override void WriteValue(ref byte[] data)
+            public override void WriteValue(SaveGameContainer container)
             {
-                WriteInt(ref data, position, value);
+                container.WriteInt(position, value);
             }
         }
 
-        public class Short : SaveGameItem
+        public class Byte : SaveGameItem
         {
             protected byte value;
 
-            public Short(string name, int position) : base(name, position)
+            public Byte(string name, int position) : base(name, position)
             {
             }
 
@@ -110,14 +90,14 @@ namespace RACSaveGameEditor {
                 return widget;
             }
 
-            public override void ReadValue(byte[] data)
+            public override void ReadValue(SaveGameContainer container)
             {
-                value = data[position];
+                value = container.ReadByte(position);
             }
 
-            public override void WriteValue(ref byte[] data)
+            public override void WriteValue(SaveGameContainer container)
             {
-                data[position] = value;
+                container.WriteByte(position, value);
             }
         }
 
@@ -143,7 +123,7 @@ namespace RACSaveGameEditor {
             }
         }
 
-        public class RangedShort : Short
+        public class RangedShort : Byte
         {
             protected int min;
             protected int max;
@@ -165,7 +145,7 @@ namespace RACSaveGameEditor {
             }
         }
 
-        public class Boolean : Short
+        public class Boolean : Byte
         {
             public Boolean(string name, int position) : base(name, position)
             {

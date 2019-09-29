@@ -168,5 +168,56 @@ namespace RACSaveGameEditor
                 File.WriteAllBytes(Path.Combine(path, fileName), data);
             }
         }
+
+        public static GameType DetectPSVGameType(string prefix)
+        {
+            Console.WriteLine("[PSV] Attempting to match prefix {0}", prefix);
+            switch (prefix)
+            {
+                case "RC1":
+                    return GameType.RAC;
+                case "RC2":
+                    return GameType.GC;
+                case "RC3":
+                    return GameType.UYA;
+            }
+
+            return GameType.ERROR;
+        }
+
+        public class DecryptedPSV : SaveGameContainer
+        {
+            public DecryptedPSV(string path) : base(path)
+            {
+                this.path = path;
+
+
+                string prefix = "";
+                try
+                {
+                    prefix = Path.GetFileName(path).Split('_')[0];
+                }
+                catch { }
+
+                type = DetectPSVGameType(prefix);
+
+                if (type == GameType.ERROR)
+                {
+                    Console.WriteLine("[PSV] Couldn't detect game version"); 
+                    //Might be possible to detect which game it is by analyzing header
+                    //Needs more research
+                }
+            }
+
+            public override byte[] Load()
+            {
+                return File.ReadAllBytes(path);
+            }
+
+            public override void Save(byte[] data)
+            {
+                File.WriteAllBytes(path, data);
+            }
+        }
     }
 }

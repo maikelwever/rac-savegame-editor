@@ -128,6 +128,12 @@ namespace RACSaveGameEditor {
             protected int min;
             protected int max;
 
+            public RangedShort(string name, int position, int max) : base(name, position)
+            {
+                this.min = 0;
+                this.max = max;
+            }
+
             public RangedShort(string name, int position, int min, int max) : base(name, position)
             {
                 this.min = min;

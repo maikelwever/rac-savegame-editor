@@ -10,6 +10,7 @@ namespace RACSaveGameEditor
         TOD = 5,
         QFB = 6,
         ACIT = 7,
+        NEXUS = 8,
 
     }
     public static class GameTypeFormatter {
@@ -29,6 +30,8 @@ namespace RACSaveGameEditor
                     return "Ratchet and Clank Future : Quest for Booty";
                 case GameType.ACIT:
                     return "Ratchet and Clank Future : A Crack in Time";
+                case GameType.NEXUS:
+                    return "Ratchet and Clank : Into the Nexus";
                 default:
                     return "Game version could not be properly detected.";
             }

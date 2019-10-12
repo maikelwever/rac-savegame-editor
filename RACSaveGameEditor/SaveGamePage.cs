@@ -33,8 +33,17 @@ namespace RACSaveGameEditor
                 case GameType.UYA:
                     saveGameData = GameItems.RacThreeItems;
                     break;
+                case GameType.TOD:
+                    saveGameData = GameItems.RacToolsItems;
+                    break;
                 case GameType.QFB:
-                    saveGameData = GameItems.RacQuestBooty;
+                    saveGameData = GameItems.RacQuestBootyItems;
+                    break;
+                case GameType.ACIT:
+                    saveGameData = GameItems.RacCrackTimeItems;
+                    break;
+                case GameType.NEXUS:
+                    saveGameData = GameItems.RacNexusItems;
                     break;
                 default:
                     saveGameData = new Dictionary<string, List<SaveGameItem>>();

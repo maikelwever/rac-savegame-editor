@@ -2,13 +2,13 @@
 
 A savegame editor for the Ratchet and Clank series of games.
 
-![Screenshot of the UI](/screenshot.png?raw=true)
+![Screenshot of the UI](/docs/screenshot.png?raw=true)
 
 
 # Functional parts
  
  - Can load savegames in PS3 format, both decrypted and encrypted.
- - Can load savegames from PS Vita, [in decrypted format](/HOW-TO-MOVE-SAVES-FOR-VITA.md).
+ - Can load savegames from PS Vita, [in decrypted format](/docs/HOW-TO-MOVE-SAVES-FOR-VITA.md).
  - Can load savegames from PS2 in .bin format (can be obtained using uLaunchELF)
  - Loads supported values from the savegame and shows these in the UI.
  - Write back modified data to savegame for decrypted PS3 and PSVita.

@@ -12,7 +12,7 @@ Worst case scenario was I had to delete all my saves, reason why I'd recommend y
 1. Open VitaShell then browse to ux0:user/00/savedata.
 2. Highlight the PCSF00482 folder. **Do NOT press X yet !**
 3. Press Δ and select _Open decrypted_, like this, then press X.
-![Screenshot of the *open decrypted* button](/vitahelp.png?raw=true)
+![Screenshot of the *open decrypted* button](/docs/vitahelp.png?raw=true)
 4. Select the saves you want to backup with Square, then press Δ and select *Copy*.
 Naming scheme : *RCX_SAVEDATA_Y.bin* where *X* is the game (1 = RaC, 2 = GC, 3 = UYA) and *Y* the slot (1-5).
 5. Go to either a folder you created at ux0: or in ux0:data, then press Δ and choose *Paste*.
@@ -33,7 +33,7 @@ FTP will require the console to be connected to the same network as the PC.
 5. Browse to ux0:user/00/savedata.
 6. Highlight the PSCF00482 folder. **Do NOT press X yet !**
 7. Press Δ and select _Open decrypted_, like this, then press X.
-![Screenshot of the *open decrypted* button](/vitahelp.png)
+![Screenshot of the *open decrypted* button](/docs/vitahelp.png?raw=true)
 8. Press Δ and select *Paste*. Note that **NO CONFIRMATION WILL BE ASKED** and your old saves will be **UNRECOVERABLE** !
 
 ***

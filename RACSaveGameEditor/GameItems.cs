@@ -216,6 +216,14 @@ namespace RACSaveGameEditor
             }
         };
 #endregion
+#region RacDeadlockedItems
+        public static Dictionary<string, List<SaveGameItem>> RacDeadlockedItems = new Dictionary<string, List<SaveGameItem>> {
+            {
+                "Bolt counts", new List<SaveGameItem> {
+                }
+            }
+        };
+#endregion
 #region RacToolsItems
         public static Dictionary<string, List<SaveGameItem>> RacToolsItems = new Dictionary<string, List<SaveGameItem>> {
             {

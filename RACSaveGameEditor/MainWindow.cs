@@ -10,7 +10,7 @@ namespace RACSaveGameEditor
         [UI] private ImageMenuItem fileOpenEncryptedPS3;
         [UI] private ImageMenuItem fileOpenDecryptedPS3;
         [UI] private ImageMenuItem fileOpenPSVita;
-        [UI] private ImageMenuItem fileOpenPS2PSU;
+        [UI] private ImageMenuItem fileOpenPS2Bin;
         [UI] private ImageMenuItem fileSaveButton;
         [UI] private ImageMenuItem fileSaveAsButton;
         [UI] private ImageMenuItem closeTabButton;
@@ -53,7 +53,14 @@ namespace RACSaveGameEditor
                     LoadSaveGame(new SaveGameContainer.DecryptedPSV(filename));
                 }
             };
-            //fileOpenPS2PSU.Activated += FileOpenButton_Clicked;
+            fileOpenPS2Bin.Activated += (sender, args) =>
+            {
+                string filename = OpenFileOpenDialog(FileChooserAction.Open);
+                if (filename.Length > 0)
+                {
+                    LoadSaveGame(new SaveGameContainer.PS2BinFile(filename));
+                }
+            };
             fileSaveButton.Activated += FileSaveButton_Clicked;
             closeTabButton.Activated += CloseTabButton_Clicked;
             quitButton.Activated += Window_DeleteEvent;

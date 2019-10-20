@@ -118,8 +118,8 @@
                           </object>
                         </child>
                         <child>
-                          <object class="GtkImageMenuItem" id="fileOpenPS2PSU">
-                            <property name="label">Open PS2 .PSU</property>
+                          <object class="GtkImageMenuItem" id="fileOpenPS2Bin">
+                            <property name="label">Open PS2 .bin</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="image">openPS2Image</property>

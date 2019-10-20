@@ -8,15 +8,24 @@ A savegame editor for the Ratchet and Clank series of games.
 # Functional parts
  
  - Can load savegames in PS3 format, both decrypted and encrypted.
- - Contains code (currently not in use) to re-crypt the savegame for import on an actual PS3.
- - Loads some basic values from the savegame and shows these in the UI.
+ - Can load savegames from PS Vita, in decrypted format.
+ - Can load savegames from PS2 in .bin format (can be obtained using uLaunchELF)
+ - Loads supported values from the savegame and shows these in the UI.
+ - Write back modified data to savegame for decrypted PS3 and PSVita.
 
 
 # Currently supported games
 
+This does not denote how many items in the savegame are visible/editable.
+
  - Ratchet and Clank 1 (OG)
  - Ratchet and Clank 2 (Going Commando)
  - Ratchet and Clank 3 (Up Your Arsenal)
+ - Ratchet: Deadlocked / Gladiator
+ - Ratchet and Clank Future: Tools Of Destruction
+ - Ratchet and Clank Future: Quest For Booty
+ - Ratchet and Clank Future: A Crack In Time
+ - Ratchet and Clank: Into the Nexus
 
 
 # Do I need the encrypted or decrypted load button?
@@ -29,8 +38,9 @@ A savegame editor for the Ratchet and Clank series of games.
 # Short term roadmap
 
  - Support all Ratchet games on the PS3.
+ - Implement writing for PS2 .bin format, with checksum support
+ - Fix encryption writeback for PS3 format savegames.
  - Add as much editable value as currently known.
- - Support opening .PSU files from PS2 Quadriligy (so not the PSP ports for now).
 
 
 # Development

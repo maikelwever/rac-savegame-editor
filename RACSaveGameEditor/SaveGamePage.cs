@@ -33,6 +33,9 @@ namespace RACSaveGameEditor
                 case GameType.UYA:
                     saveGameData = GameItems.RacThreeItems;
                     break;
+                case GameType.DL:
+                    saveGameData = GameItems.RacDeadlockedItems;
+                    break;
                 case GameType.TOD:
                     saveGameData = GameItems.RacToolsItems;
                     break;

@@ -252,5 +252,71 @@ namespace RACSaveGameEditor
             }
 
         }
+
+        public static GameType DetectPS2GameType(string prefix)
+        {
+            Console.WriteLine("[PS2] Attempting to match {0}", prefix);
+            switch (prefix)
+            {
+                case "SCES-50916": case "SCUS-97199": case "SCAJ-20001": 
+                case "SCKA-20120": case "SCKA-15037": case "SCKA-19211":
+                case "SCKA-19316":
+                    return GameType.RAC;
+                case "SCES-51607": case "SCUS-97268": case "SCUS-97513":
+                case "SCKA-20011": case "SCPS-15056": case "SCPS-19302":
+                case "SCPS-19317":
+                    return GameType.GC;
+                case "SCES-52456": case "SCUS-97353": case "SCUS-97518":
+                case "SCAJ-20109": case "SCKA-20037": case "SCPS-19309":
+                case "SCPS-15084":
+                    return GameType.UYA;
+                case "SCES-53285": case "SCUS-97465": case "SCAJ-20157":
+                case "SCKA-20060": case "SCPS-15100": case "SCPS-15099":
+                case "SCPS-19321": case "SCPS-19328":
+                    return GameType.DL;
+            }
+
+            return GameType.ERROR;
+        }
+
+        public class PS2BinFile : SaveGameContainer
+        {
+            public PS2BinFile(string path) : base(path)
+            {
+                this.path = path;
+                string dirname = Path.GetFileName(Path.GetDirectoryName(path));
+                type = DetectPS2GameType(dirname.Substring(0, dirname.Length - 7).Substring(2));
+
+                if (type == GameType.ERROR)
+                {
+                    Console.WriteLine("[PS2] Couldn't detect game version"); 
+                }
+            }
+
+            public override void Load()
+            {
+                fileData = File.ReadAllBytes(path);
+            }
+
+            public override void Save()
+            {
+                // TODO: Enable this and implement checksum re-calculation.
+                // File.WriteAllBytes(path, fileData);
+            }
+
+            public override int ReadInt(int position) {
+                // TODO: Test if this works as intended and remove this message if so.
+                return (fileData[position + 3] << 24) | (fileData[position + 2] << 16) | (fileData[position + 1] << 8) | (fileData[position + 0]);
+            }
+
+            public override void WriteInt(int position, int value) {
+                byte[] byt = BitConverter.GetBytes(value);
+                fileData[position + 0] = byt[0];
+                fileData[position + 1] = byt[1];
+                fileData[position + 2] = byt[2];
+                fileData[position + 3] = byt[3];
+            }
+
+        }
     }
 }

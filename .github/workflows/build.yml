@@ -5,10 +5,6 @@ on: [push]
 jobs:
   build:
 
-    strategy:
-      matrix:
-        target: [linux-x64, win-x64]
-
     runs-on: ubuntu-latest
     
     steps:
@@ -18,8 +14,50 @@ jobs:
           dotnet-version: '2.2.402' # SDK Version to use.
       - run: dotnet --list-runtimes && dotnet --list-sdks
       - run: git submodule update --init
-      - run: dotnet publish -c Release -o /tmp/out/bin --self-contained --runtime ${{ matrix.target }}
-      - run: cd /tmp/out && zip -r /tmp/racsavegameeditor-$(git log HEAD~1..HEAD --pretty=format:"%ct" | head -n1)-${{ matrix.target }}.zip .
+      - run: dotnet publish -c Release -o /tmp/out-linux/bin --self-contained --runtime linux-x64
+      - run: zip -j -r /tmp/racsavegameeditor-linux64.zip /tmp/out-linux/bin
       - uses: actions/upload-artifact@v1
         with:
-            path: /tmp/*.zip
+            name: racsavegameeditor-linux64.zip
+            path: /tmp/racsavegameeditor-linux64.zip
+      - run: dotnet publish -c Release -o /tmp/out-win/bin --self-contained --runtime win-x64
+      - run: zip -j -r /tmp/racsavegameeditor-win64.zip /tmp/out-win/bin
+      - uses: actions/upload-artifact@v1
+        with:
+            name: racsavegameeditor-win64.zip
+            path: /tmp/racsavegameeditor-win64.zip
+      - name: Create Release
+        id: create_release
+        if: github.ref == 'master'
+        uses: actions/create-release@master
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+            tag_name: ${{ github.sha }}
+            release_name: PreRelease ${{ github.sha }}
+            draft: false
+            prerelease: true
+
+      - name: Upload Release Asset Linux
+        if: github.ref == 'master'
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }} 
+            asset_name: racsavegameeditor-linux64.zip
+            asset_path: /tmp/racsavegameeditor-linux64.zip
+            asset_content_type: application/zip
+
+      - name: Upload Release Asset Windows
+        if: github.ref == 'master'
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }} 
+            asset_name: racsavegameeditor-win64.zip
+            asset_path: /tmp/racsavegameeditor-win64.zip
+            asset_content_type: application/zip

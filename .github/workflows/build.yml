@@ -25,7 +25,7 @@ jobs:
             path: /tmp/zips
       - name: Create Release
         id: create_release
-        if: github.ref == 'master'
+        if: github.ref == 'refs/heads/master'
         uses: actions/create-release@master
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -36,7 +36,7 @@ jobs:
             prerelease: true
 
       - name: Upload Release Asset Linux
-        if: github.ref == 'master'
+        if: github.ref == 'refs/heads/master'
         uses: actions/upload-release-asset@v1.0.1
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -47,7 +47,7 @@ jobs:
             asset_content_type: application/zip
 
       - name: Upload Release Asset Windows
-        if: github.ref == 'master'
+        if: github.ref == 'refs/heads/master'
         uses: actions/upload-release-asset@v1.0.1
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -15,17 +15,13 @@ jobs:
       - run: dotnet --list-runtimes && dotnet --list-sdks
       - run: git submodule update --init
       - run: dotnet publish -c Release -o /tmp/out-linux/bin --self-contained --runtime linux-x64
-      - run: zip -j -r /tmp/racsavegameeditor-linux64.zip /tmp/out-linux/bin
-      - uses: actions/upload-artifact@v1
-        with:
-            name: racsavegameeditor-linux64.zip
-            path: /tmp/racsavegameeditor-linux64.zip
+      - run: zip -j -r /tmp/zips/racsavegameeditor-linux64.zip /tmp/out-linux/bin
       - run: dotnet publish -c Release -o /tmp/out-win/bin --self-contained --runtime win-x64
-      - run: zip -j -r /tmp/racsavegameeditor-win64.zip /tmp/out-win/bin
+      - run: zip -j -r /tmp/zips/racsavegameeditor-win64.zip /tmp/out-win/bin
       - uses: actions/upload-artifact@v1
         with:
-            name: racsavegameeditor-win64.zip
-            path: /tmp/racsavegameeditor-win64.zip
+            name: zips
+            path: /tmp/zips
       - name: Create Release
         id: create_release
         if: github.ref == 'master'
@@ -46,7 +42,7 @@ jobs:
         with:
             upload_url: ${{ steps.create_release.outputs.upload_url }} 
             asset_name: racsavegameeditor-linux64.zip
-            asset_path: /tmp/racsavegameeditor-linux64.zip
+            asset_path: /tmp/zips/racsavegameeditor-linux64.zip
             asset_content_type: application/zip
 
       - name: Upload Release Asset Windows
@@ -57,5 +53,5 @@ jobs:
         with:
             upload_url: ${{ steps.create_release.outputs.upload_url }} 
             asset_name: racsavegameeditor-win64.zip
-            asset_path: /tmp/racsavegameeditor-win64.zip
+            asset_path: /tmp/zips/racsavegameeditor-win64.zip
             asset_content_type: application/zip

@@ -6,6 +6,8 @@
         <RootNamespace>RACSaveGameEditor</RootNamespace>
         <LangVersion>7.2</LangVersion>
         <StartupObject>RACSaveGameEditor.Program</StartupObject>
+        <PublishTrimmed>true</PublishTrimmed>
+        <PublishReadyToRun>true</PublishReadyToRun>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

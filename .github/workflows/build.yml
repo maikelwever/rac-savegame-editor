@@ -7,9 +7,9 @@ jobs:
 
     strategy:
       matrix:
-        platform: [ubuntu-latest, macos-latest, windows-latest]
+        target: [linux-x64, win-x64]
 
-    runs-on: ${{ matrix.platform }}
+    runs-on: ubuntu-latest
     
     steps:
       - uses: actions/checkout@master
@@ -18,4 +18,10 @@ jobs:
           dotnet-version: '2.2.402' # SDK Version to use.
       - run: dotnet --list-runtimes && dotnet --list-sdks
       - run: git submodule update --init
-      - run: dotnet build
+      - run: dotnet publish -c Release -o /tmp/out/bin --self-contained --runtime ${{ matrix.target }}
+      - run: curl file | unzip -C /tmp/out -
+        if: ${{ matrix.target }} == "win-x64"
+      - uses: actions/upload-artifact@v1
+        with:
+            name: racsavegameeditor-$(git log HEAD~1..HEAD --pretty=format:"%ct" | head -n1)-${{ matrix.target }}.zip
+            path: /tmp/out

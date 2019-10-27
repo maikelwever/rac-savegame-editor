@@ -19,9 +19,7 @@ jobs:
       - run: dotnet --list-runtimes && dotnet --list-sdks
       - run: git submodule update --init
       - run: dotnet publish -c Release -o /tmp/out/bin --self-contained --runtime ${{ matrix.target }}
-      - run: curl file | unzip -C /tmp/out -
-        if: matrix.target == 'win-x64'
+      - run: cd /tmp/out && zip -r /tmp/racsavegameeditor-$(git log HEAD~1..HEAD --pretty=format:"%ct" | head -n1)-${{ matrix.target }}.zip .
       - uses: actions/upload-artifact@v1
         with:
-            name: racsavegameeditor-$(git log HEAD~1..HEAD --pretty=format:"%ct" | head -n1)-${{ matrix.target }}.zip
-            path: /tmp/out
+            path: /tmp/*.zip

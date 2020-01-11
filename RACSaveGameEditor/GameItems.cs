@@ -23,11 +23,71 @@ namespace RACSaveGameEditor
                 }
             },
             {
+                "Weapon Unlocks", new List<SaveGameItem> {
+                    new SaveGameItem.Boolean("Bomb Glove", 0x1c2),
+                    new SaveGameItem.Boolean("Pyrocitor", 0x1c8),
+                    new SaveGameItem.Boolean("Blaster", 0x1c7),
+                    new SaveGameItem.Boolean("Glove of Doom", 0x1cc),
+                    new SaveGameItem.Boolean("Mine Glove", 0x1c9),
+                    new SaveGameItem.Boolean("Taunter", 0x1c6),
+                    new SaveGameItem.Boolean("Suck Cannon", 0x1c1),
+                    new SaveGameItem.Boolean("Devastator", 0x1c3),
+                    new SaveGameItem.Boolean("Walloper", 0x1ca),
+                    new SaveGameItem.Boolean("Visibomb Gun", 0x1c5),
+                    new SaveGameItem.Boolean("Decoy Glove", 0x1d1),
+                    new SaveGameItem.Boolean("Drone Device", 0x1d0),
+                    new SaveGameItem.Boolean("Tesla Claw", 0x1cb),
+                    new SaveGameItem.Boolean("Morph-o-ray", 0x1cd),
+                    new SaveGameItem.Boolean("R.Y.N.O.", 0x1cf),
+                }
+            },
+            {
+                "Gadget unlocks", new List<SaveGameItem> {
+                    new SaveGameItem.Boolean("Trespasser", 0x1d2),
+                    new SaveGameItem.Boolean("Hydrodisplacer", 0x1ce),
+                    new SaveGameItem.Boolean("Swingshot", 0x1c4),
+                    new SaveGameItem.Boolean("Gadgetron PDA", 0x1d8),
+                    new SaveGameItem.Boolean("Metal Detector", 0x1d3),
+                    new SaveGameItem.Boolean("Hologuise", 0x1d7),
+                    
+                    new SaveGameItem.Boolean("Heli-Pack", 0x1ba),
+                    new SaveGameItem.Boolean("Thruster-Pack", 0x1bb),
+                    new SaveGameItem.Boolean("Hydro-Pack", 0x1bc),
+                    
+                    new SaveGameItem.Boolean("O2 Mask", 0x1be),
+                    new SaveGameItem.Boolean("Sonic Summoner", 0x1bd),
+                    new SaveGameItem.Boolean("Pilot's Helmet", 0x1bf),
+                    
+                    new SaveGameItem.Boolean("Grindboots", 0x1d5),
+                    new SaveGameItem.Boolean("Magneboots", 0x1d4),
+                }
+            },
+            {
+                "Item unlocks", new List<SaveGameItem> {
+                    new SaveGameItem.Boolean("Hoverboard", 0x1d6),
+                    new SaveGameItem.Boolean("Persuader", 0x1db),
+                    new SaveGameItem.Boolean("Bolt Grabber", 0x1da),
+                    new SaveGameItem.Boolean("Map-o-matic", 0x1d9),
+                }
+            },
+            {
                 "Bolt counts", new List<SaveGameItem> {
                     new SaveGameItem.Integer("Number of Bolts", 0x24),
                     new SaveGameItem.Integer("Total Bolts Collected", 0x48),
                 }
-            }
+            },
+            {
+                "Quick Select", new List<SaveGameItem> {
+                    new SaveGameItem.Integer("Slot 1", 0x22c),
+                    new SaveGameItem.Integer("Slot 2", 0x230),
+                    new SaveGameItem.Integer("Slot 3", 0x234),
+                    new SaveGameItem.Integer("Slot 4", 0x238),
+                    new SaveGameItem.Integer("Slot 5", 0x23c),
+                    new SaveGameItem.Integer("Slot 6", 0x240),
+                    new SaveGameItem.Integer("Slot 7", 0x244),
+                    new SaveGameItem.Integer("Slot 8", 0x248),
+                }
+            },
         };
 
 #endregion

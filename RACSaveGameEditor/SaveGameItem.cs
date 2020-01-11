@@ -159,13 +159,18 @@ namespace RACSaveGameEditor {
 
             public override Widget CreateEditWidget()
             {
-                var widget = new Switch();
-                widget.Active = value > 0;
+                /*var widget = new Switch {Active = value > 0};
                 widget.ButtonReleaseEvent += (sender, args) => {
                     value = (byte) (widget.Active ? 1 : 0);
+                };*/
+                
+                var widget = new CheckButton {Active = value > 0};
+                widget.Clicked += (sender, args) =>
+                {
+                    value = (byte) (widget.Active ? 1 : 0);
                 };
-                var box = new Box(Orientation.Horizontal, 10);
-                box.CenterWidget = widget;
+
+                var box = new Box(Orientation.Horizontal, 10) {CenterWidget = widget};
                 return box;
             }
         }

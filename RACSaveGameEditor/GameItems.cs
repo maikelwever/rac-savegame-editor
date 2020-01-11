@@ -75,7 +75,19 @@ namespace RACSaveGameEditor
                     new SaveGameItem.Integer("Number of Bolts", 0x24),
                     new SaveGameItem.Integer("Total Bolts Collected", 0x48),
                 }
-            }
+            },
+            {
+                "Quick Select", new List<SaveGameItem> {
+                    new SaveGameItem.Integer("Slot 1", 0x22c),
+                    new SaveGameItem.Integer("Slot 2", 0x230),
+                    new SaveGameItem.Integer("Slot 3", 0x234),
+                    new SaveGameItem.Integer("Slot 4", 0x238),
+                    new SaveGameItem.Integer("Slot 5", 0x23c),
+                    new SaveGameItem.Integer("Slot 6", 0x240),
+                    new SaveGameItem.Integer("Slot 7", 0x244),
+                    new SaveGameItem.Integer("Slot 8", 0x248),
+                }
+            },
         };
 
 #endregion

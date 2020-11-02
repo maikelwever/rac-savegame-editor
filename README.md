@@ -2,6 +2,9 @@
 
 A savegame editor for the Ratchet and Clank series of games.
 
+## Unmaintained: please use https://github.com/maikelwever/slimseditor instead.
+
+
 ![Screenshot of the UI](/docs/screenshot.png?raw=true)
 
 
